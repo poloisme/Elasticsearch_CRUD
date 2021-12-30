@@ -1,4 +1,8 @@
 const errorHandle = (err, req, res, next) => {
+  if (err.name === "ResponseError") {
+    err.status = err.meta.statusCode;
+    err.message = err.meta.body;
+  }
   err.status = err.status || 500;
 
   // ObjectID: not found
