@@ -1,6 +1,6 @@
 const userService = require("../services/user.service");
 
-//[POST] api/users/create
+//create a new user
 const createNewUser = async (req, res, next) => {
   try {
     const response = await userService.createNew(req.body);
@@ -10,7 +10,7 @@ const createNewUser = async (req, res, next) => {
   }
 };
 
-//[GET] api/users
+//get all user
 const getAllUser = async (req, res, next) => {
   try {
     const response = await userService.getAll();
@@ -20,7 +20,7 @@ const getAllUser = async (req, res, next) => {
   }
 };
 
-//[GET] api/users/:id
+//get a user by id
 const getOneUser = async (req, res, next) => {
   try {
     const response = await userService.getOne(req.params.id);
@@ -30,7 +30,7 @@ const getOneUser = async (req, res, next) => {
   }
 };
 
-//[DELETE] api/users/:id
+//delete a user by id
 const deleteOneUser = async (req, res, next) => {
   try {
     const response = await userService.deleteOne(req.params.id);
@@ -40,7 +40,7 @@ const deleteOneUser = async (req, res, next) => {
   }
 };
 
-//[PUT] api/users/:id
+//update a user by id
 const updateOneUser = async (req, res, next) => {
   try {
     const response = await userService.update(req.params.id, req.body);

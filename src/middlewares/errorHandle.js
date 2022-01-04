@@ -1,15 +1,11 @@
 const errorHandle = (err, req, res, next) => {
   if (err.name === "ResponseError") {
-    err.status = err.meta.statusCode;
-    err.message = err.meta.body;
+    if (Number.isInteger(err.meta.statusCode)) {
+      err.status = err.meta.statusCode;
+      err.message = err.meta.body;
+    }
   }
   err.status = err.status || 500;
-
-  // ObjectID: not found
-  if (err.kind === "ObjectID") {
-    err.status = 404;
-    err.message = `The ${req.originalUrl} is not found because wrong id`;
-  }
 
   //handle error sequelize
   if (err.name === "SequelizeUniqueConstraintError") {

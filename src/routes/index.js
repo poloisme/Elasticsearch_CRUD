@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const userRoute = require("./user.route");
+const userRoute = require("./user");
 const errorHandle = require("../middlewares/errorHandle");
 
 const initRoute = (app) => {
