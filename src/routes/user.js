@@ -1,23 +1,44 @@
 const router = require("express").Router();
 
 const userController = require("../controllers/user.controller");
-const { validateBody } = require("../middlewares/validateData");
+const { validateBody, validateParam } = require("../middlewares/validateData");
 const elasticsearch = require("../elastic/elasticsearch");
+const authToken = require("../middlewares/auth");
 
 router.route("/create-index").get(elasticsearch.createIndex);
 router.route("/delete-index").get(elasticsearch.deleteIndex);
 router.route("/putMapping").get(elasticsearch.putMapping);
 
 router
-  .route("/create")
-  .post(validateBody("userSchemaCreate"), userController.createNewUser);
+  .route("/signup")
+  .post(validateBody("userSchemaCreate"), userController.signup);
 
-router.route("/").get(userController.getAllUser);
+router
+  .route("/login")
+  .post(validateBody("userSchemaLogin"), userController.login);
+
+router.route("/refresh-token").post(authToken, userController.refreshToken);
+
+router
+  .route("/create")
+  .post(
+    authToken,
+    validateBody("userSchemaCreate"),
+    userController.createNewUser
+  );
+
+router.route("/").get(authToken, userController.getAllUser);
+
+router.route("/delete-all").delete(authToken, userController.deleteAllUser);
 
 router
   .route("/:id")
-  .get(userController.getOneUser)
-  .delete(userController.deleteOneUser)
-  .put(validateBody("userSchemaUpdate"), userController.updateOneUser);
+  .get(authToken, userController.getOneUser)
+  .delete(authToken, userController.deleteOneUser)
+  .put(
+    authToken,
+    validateBody("userSchemaUpdate"),
+    userController.updateOneUser
+  );
 
 module.exports = router;

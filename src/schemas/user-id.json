@@ -1,0 +1,6 @@
+{
+    "type": "integer",
+    "errorMessage": {
+        "type": "should be an integer"
+    }
+}

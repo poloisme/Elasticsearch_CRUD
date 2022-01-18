@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //init route
 initRoute(app);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is listening http://localhost:${port}`);
 });
+
+module.exports = { app, server };

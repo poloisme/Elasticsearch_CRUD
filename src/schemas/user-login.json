@@ -7,26 +7,19 @@
         "format": "password",
         "minLength": 6,
         "maxLength": 12
-      },
-      "email": { "type": "string", "format": "email" },
-      "status": { "type": "integer", "enum": [1, 10] },
-      "roles_id": { "type": "integer", "enum": [1, 2, 3, 4] }
+      }
     },
-    "required": ["username", "password", "email"],
+    "required": ["username", "password"],
     "additionalProperties": false,
     "errorMessage": {
       "type": "should be an object",
       "properties": {
         "username": "username should be string with length >= 5 and <= 12",
-        "password": "password should be password with length >= 6 and <= 12",
-        "email": "email should be email",
-        "status": "status should be enum 1 or 10",
-        "roles_id": "roles_id should be enum 1, 2, 3 or 4"
+        "password": "password should be password with length >= 6 and <= 12"
       },
       "required": {
         "username": "should have a property 'username'",
-        "password": "should have a property 'password'",
-        "email": "should have a property 'email'"
+        "password": "should have a property 'password'"
       },
       "additionalProperties": "should not have properties other"
     }
